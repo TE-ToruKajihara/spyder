@@ -1,0 +1,49 @@
+version: '3'
+services:
+  mysql_db:
+    container_name: "mysql_db"
+    image: mysql:8.0
+    command: mysqld --character-set-server=utf8 --collation-server=utf8_unicode_ci
+    volumes:
+      - ../db_volume:/var/lib/mysql
+    environment: # Set up mysql database name and password
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_DATABASE: "mysql_db"
+      MYSQL_USER: "toru"
+      MYSQL_PASSWORD: "toru"
+    ports:
+      - 3306:3306
+    networks:
+      - app-tier
+
+  selenium:
+    image: selenium/standalone-firefox-debug:3.141.59
+    ports:
+      - 4444
+      - 5900:5900
+    volumes:
+      - /dev/shm:/dev/shm
+
+  spyder:
+    build:
+      context: ./spyder
+    volumes:
+      - "./spyder:/home/work"
+      - ".jupyter:/root/.jupyter"
+      # - "./SPYDER:/home/work/SPYDER"
+      # - "./NoteBook:/home/work/NoteBook"
+    ports: 
+      - "8080:8080"
+    tty: true
+    image: spyder-image
+    container_name: spyder
+    environment:
+      SELENIUM_URL: http://selenium:4444/wd/hub
+    networks:
+      - app-tier
+
+networks:
+  app-tier:
+    driver: bridge
+
