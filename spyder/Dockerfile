@@ -65,7 +65,7 @@ RUN cd /opt/chrome/ && \
     unzip chromedriver_linux64.zip
 
 ENV PATH /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/opt/chrome
-
+ENV PYTHONPATH /home/work/library
 #install jupyter-kite
 #RUN cd && \
 #    wget https://linux.kite.com/dls/linux/current && \

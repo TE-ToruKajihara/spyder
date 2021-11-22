@@ -3,7 +3,8 @@
 	"service": "spyder",
 	"workspaceFolder": "/home/work",
 	"settings": {
-		"terminal.integrated.shell.linux": "/bin/bash"
+		"terminal.integrated.shell.linux": "/bin/bash",
+		"python.pythonPath": "/usr/local/bin/python"
 	},
 	"extensions": [
 		"streetsidesoftware.code-spell-checker",

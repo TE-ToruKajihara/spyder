@@ -16,3 +16,4 @@ lxml
 chromedriver-binary
 mysql-connector-python
 sqlalchemy
+xlrd
